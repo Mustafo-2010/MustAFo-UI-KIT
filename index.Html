@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>MustaFoshoh UI KIT 🌪️🔥</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3c73ff;
+      --secondary: #ffcd3c;
+      --accent: #ff5480;
+      --success: #06d6a0;
+      --danger: #ef476f;
+      --bg: #f5f7fa;
+      --dark: #21243d;
+      --text: #252b42;
+      --radius: 18px;
+      --shadow: 0 8px 32px rgba(60, 115, 255, 0.13);
+      --hover-glow: 0 0 12px 2px #3c73ff77;
+      --selection: #aaffff44;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+    ::selection { background: var(--selection);}
+    .mui-kit-main {
+      max-width: 1200px;
+      margin: 36px auto 24px;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 32px 32px 32px;
+      box-sizing: border-box;
+      min-height: 90vh;
+    }
+    .mui-title {
+      font-size: 2.7em;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-shadow: 0 2px 14px #e7edfd;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .mui-title span {
+      font-size: 0.7em;
+      color: var(--accent);
+      text-shadow: 0 0 10px #ff548055;
+    }
+    .mui-subtitle {
+      font-size: 1.2em;
+      color: #888;
+      margin-bottom: 32px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    .mui-components {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
+      gap: 36px;
+    }
+    .mui-block {
+      background: #f9fafd;
+      border-radius: 15px;
+      padding: 26px 18px 16px 18px;
+      box-shadow: 0 3px 16px #3c73ff0d;
+      margin-bottom: 16px;
+      transition: box-shadow .22s;
+      position: relative;
+      min-width: 0;
+      overflow-x: auto;
+    }
+    .mui-block:hover {
+      box-shadow: 0 8px 36px #3c73ff1a;
+    }
+    .mui-block-title {
+      font-size: 1.13em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.35em;
+    }
+    .mui-preview {
+      margin-bottom: 20px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+    }
+    .mui-code-block {
+      background: #21243d;
+      color: #f5f7fa;
+      border-radius: 8px;
+      padding: 13px 11px 13px 17px;
+      font-size: 0.97em;
+      line-height: 1.67;
+      box-shadow: 0 2px 10px #21243d33;
+      position: relative;
+      white-space: pre;
+      overflow-x: auto;
+      margin-bottom: 0;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      cursor: pointer;
+      transition: box-shadow .13s;
+    }
+    .mui-copy-btn {
+      position: absolute;
+      top: 8px; right: 10px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 3px 13px 3px 8px;
+      font-size: 0.93em;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: background .16s, opacity .13s;
+      display: flex; gap: 7px; align-items: center;
+    }
+    .mui-copy-btn:hover {background: var(--accent);}
+    .mui-copy-btn.copied {background: var(--success);}
+    .mui-code-block .mui-copy-btn {font-size:0.91em;}
+    .mui-block-tip {
+      color: #8a9;
+      font-size: 0.9em;
+      margin-bottom: 7px;
+    }
+    /* Кнопка с анимацией */
+    .mui-btn-anim {
+      padding: 13px 36px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      border-radius: 29px;
+      font-size: 1.16em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 22px #3c73ff25;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.13s, box-shadow 0.16s, background 0.26s;
+      position: relative;
+      overflow: hidden;
+    }
+    .mui-btn-anim::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -110%; width: 90%; height: 100%;
+      background: linear-gradient(90deg, #fff5, #fff0 77%);
+      z-index: 2;
+      transform: skewX(-32deg);
+      transition: left 0.52s cubic-bezier(.5,.12,.89,.62);
+      pointer-events: none;
+    }
+    .mui-btn-anim:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 4px 36px #3c73ff4a;
+    }
+    .mui-btn-anim:hover::after {
+      left: 110%;
+    }
+    /* Пульсирующая кнопка */
+    .mui-btn-pulse {
+      position: relative;
+      background: var(--success);
+      color: #fff;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.09em;
+      font-weight: 700;
+      box-shadow: 0 0 0 0 var(--success);
+      animation: mui-pulse 1.2s infinite;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+    }
+    @keyframes mui-pulse {
+      0% {box-shadow: 0 0 0 0 var(--success);}
+      70% {box-shadow: 0 0 0 16px rgba(6,214,160,0);}
+      100% {box-shadow: 0 0 0 0 rgba(6,214,160,0);}
+    }
+    .mui-btn-pulse:hover {background: #059e74;}
+
+    /* Кнопка с 3D-эффектом */
+    .mui-btn-3d {
+      background: linear-gradient(180deg, #fff, #3c73ff66 40%, #3c73ff 100%);
+      color: #3c73ff;
+      font-weight: 700;
+      font-size: 1.03em;
+      border: none;
+      border-radius: 15px;
+      padding: 12px 34px;
+      box-shadow: 0 6px 0 #3c73ff55, 0 2px 16px #3c73ff33;
+      transition: transform .13s, box-shadow .18s;
+      cursor: pointer;
+    }
+    .mui-btn-3d:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #3c73ff77;
+    }
+    /* Кнопка с иконкой */
+    .mui-btn-icon {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 13px;
+      padding: 12px 28px 12px 16px;
+      font-size: 1.08em;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: background .17s;
+    }
+    .mui-btn-icon:hover {background: #d13c66;}
+    .mui-btn-icon svg {font-size:1.1em;}
+    /* Input с фокус-анимацией */
+    .mui-input-anim {
+      border: 2px solid #e4ebff;
+      padding: 13px 17px;
+      border-radius: 12px;
+      font-size: 1.08em;
+      background: #fafdff;
+      width: 100%;
+      transition: border-color .19s, box-shadow .19s;
+      outline: none;
+      box-shadow: 0 1px 6px #3c73ff16;
+    }
+    .mui-input-anim:focus {
+      border-color: var(--primary);
+      box-shadow: 0 2px 18px #3c73ff33;
+      background: #fff;
+    }
+    /* Input с иконкой */
+    .mui-input-icon-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .mui-input-icon {
+      border: 2px solid #e4ebff;
+      padding: 13px 17px 13px 45px;
+      border-radius: 12px;
+      font-size: 1.08em;
+      background: #fafdff;
+      width: 100%;
+      transition: border-color .19s, box-shadow .19s;
+      outline: none;
+      box-shadow: 0 1px 6px #3c73ff16;
+    }
+    .mui-input-icon:focus {
+      border-color: var(--accent);
+      box-shadow: 0 2px 18px #ff548033;
+    }
+    .mui-input-icon-box svg {
+      position: absolute;
+      left: 15px;
+      font-size: 1.15em;
+      color: var(--accent);
+      pointer-events: none;
+    }
+    /* Кастомный чекбокс */
+    .mui-checkbox {
+      position: relative;
+      display: inline-block;
+      padding-left: 34px;
+      margin-bottom: 0;
+      cursor: pointer;
+      font-size: 1.08em;
+      user-select: none;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .mui-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0; width: 0;
+    }
+    .mui-checkmark {
+      position: absolute;
+      left: 0; top: 0;
+      height: 22px; width: 22px;
+      background: #e4ebff;
+      border-radius: 7px;
+      border: 2px solid var(--primary);
+      transition: background .14s, border .17s;
+    }
+    .mui-checkbox input:checked ~ .mui-checkmark {
+      background: var(--primary);
+      border: 2px solid var(--accent);
+    }
+    .mui-checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px; top: 2px;
+      width: 7px; height: 13px;
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      transform: rotate(42deg);
+    }
+    .mui-checkbox input:checked ~ .mui-checkmark:after {
+      display: block;
+    }
+    /* Кастомный радио */
+    .mui-radio {
+      position: relative;
+      display: inline-block;
+      padding-left: 32px;
+      margin-bottom: 0;
+      cursor: pointer;
+      font-size: 1.08em;
+      user-select: none;
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 18px;
+    }
+    .mui-radio input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .mui-radiomark {
+      position: absolute;
+      left: 0; top: 1px;
+      height: 20px; width: 20px;
+      background: #f9e4eb;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      transition: background .13s, border .14s;
+    }
+    .mui-radio input:checked ~ .mui-radiomark {
+      background: var(--accent);
+      border: 2px solid var(--primary);
+    }
+    .mui-radiomark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 5px; top: 5px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .mui-radio input:checked ~ .mui-radiomark:after {
+      display: block;
+    }
+    /* Кастомный Switch */
+    .mui-switch {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 22px;
+      user-select: none;
+      font-weight: 600;
+      color: var(--success);
+    }
+    .mui-switch-input {
+      display: none;
+    }
+    .mui-switch-slider {
+      width: 48px;
+      height: 26px;
+      border-radius: 13px;
+      background: #e4ebff;
+      position: relative;
+      transition: background 0.15s;
+      margin: 0 8px 0 0;
+    }
+    .mui-switch-slider::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      transition: left .18s, background .15s;
+      box-shadow: 0 1px 5px #c9d7ff80;
+    }
+    .mui-switch-input:checked + .mui-switch-slider {
+      background: var(--success);
+    }
+    .mui-switch-input:checked + .mui-switch-slider::before {
+      left: 26px;
+      background: #e4ffef;
+    }
+    /* Tooltip */
+    .mui-tooltip {
+      position: relative;
+      cursor: pointer;
+      text-decoration: underline dotted #c9d7ff;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .mui-tooltip-text {
+      visibility: hidden;
+      width: 180px;
+      background: #3c73ff;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 8px 10px;
+      position: absolute;
+      z-index: 10;
+      left: 50%; transform: translateX(-50%);
+      bottom: 120%;
+      opacity: 0;
+      transition: opacity 0.16s;
+      font-size: 0.99em;
+      font-weight: 400;
+      pointer-events: none;
+    }
+    .mui-tooltip:hover .mui-tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    /* Card */
+    .mui-card {
+      background: linear-gradient(135deg,#fff,#e4ebff 75%);
+      border-radius: 17px;
+      box-shadow: 0 4px 32px #3c73ff13;
+      padding: 26px 22px 22px;
+      margin-bottom: 10px;
+      transition: box-shadow .18s;
+      min-width: 180px;
+      max-width: 340px;
+      margin-left: auto; margin-right: auto;
+    }
+    .mui-card:hover {
+      box-shadow: 0 10px 36px #3c73ff24;
+    }
+    .mui-card-title {
+      font-size: 1.19em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 7px;
+      letter-spacing: 1px;
+    }
+    .mui-card-desc {
+      color: #686868;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+    /* Alert */
+    .mui-alert {
+      border-radius: 11px;
+      padding: 16px 26px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+      gap: 12px;
+      box-shadow: 0 2px 10px #dbeaff80;
+    }
+    .mui-alert-info { background: #e7edfd; color: #3460d1; }
+    .mui-alert-success { background: #e4ffef; color: #21b15f; }
+    .mui-alert-warning { background: #fff8e7; color: #b39322; }
+    .mui-alert-danger { background: #ffe7ed; color: #d13260; }
+    .mui-alert-icon {
+      font-size: 1.4em;
+      margin-right: 7px;
+    }
+    /* Modal */
+    .mui-modal-backdrop {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #21243d99;
+      align-items: center;
+      justify-content: center;
+    }
+    .mui-modal {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 40px #0002;
+      max-width: 370px;
+      min-width: 240px;
+      padding: 30px 24px 18px 24px;
+      position: relative;
+      text-align: center;
+      animation: mui-modal-in .33s cubic-bezier(.11,1.28,.27,1.08);
+    }
+    @keyframes mui-modal-in {
+      from {transform: scale(0.85) translateY(40px); opacity:0;}
+      to {transform: scale(1) translateY(0); opacity:1;}
+    }
+    .mui-modal-title {
+      font-size: 1.27em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 13px;
+    }
+    .mui-modal-close {
+      position: absolute;
+      top: 15px; right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.4em;
+      color: #999;
+      cursor: pointer;
+    }
+    /* Loader */
+    .mui-loader {
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      border: 4px solid var(--primary);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      animation: mui-spin 0.9s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes mui-spin {
+      to { transform: rotate(360deg);}
+    }
+    /* Аватар */
+    .mui-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.67em;
+      font-weight: bold;
+      color: #fff;
+      margin-right: 10px;
+      box-shadow: 0 2px 10px #3c73ff33;
+      border: 3px solid #fff;
+      transition: box-shadow 0.18s;
+    }
+    .mui-avatar:hover {box-shadow: 0 6px 22px #3c73ff88;}
+    /* Прогресс-бар */
+    .mui-progress-bar-bg {
+      width: 100%;
+      height: 18px;
+      background: #e4ebff;
+      border-radius: 9px;
+      overflow: hidden;
+      margin-top: 6px;
+      box-shadow: 0 2px 8px #3c73ff13;
+    }
+    .mui-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #06d6a0, #3c73ff 80%);
+      border-radius: 9px;
+      transition: width .33s cubic-bezier(.35,1.2,.53,1.01);
+      box-shadow: 0 1px 6px #06d6a055;
+    }
+    /* Таблица */
+    .mui-table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px #3c73ff09;
+      font-size: 0.99em;
+    }
+    .mui-table th, .mui-table td {
+      padding: 11px 13px;
+      border-bottom: 1px solid #e4ebff;
+      text-align: left;
+    }
+    .mui-table th {
+      background: #f7faff;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .mui-table tr:last-child td {border-bottom: none;}
+    .mui-table tr:hover td {background: #f3f9ff;}
+    /* Дропдаун */
+    .mui-dropdown {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      min-width: 154px;
+    }
+    .mui-dropdown-btn {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 600;
+      border: 2px solid #e4ebff;
+      border-radius: 11px;
+      padding: 13px 31px 13px 17px;
+      min-width: 120px;
+      cursor: pointer;
+      font-size: 1.09em;
+      transition: border .16s;
+      text-align: left;
+      width: 100%;
+      position: relative;
+    }
+    .mui-dropdown-btn:after {
+      content: "▼";
+      font-size: 0.85em;
+      color: #999;
+      position: absolute;
+      right: 13px; top: 13px;
+      pointer-events: none;
+      transition: .2s;
+    }
+    .mui-dropdown-list {
+      display: none;
+      position: absolute;
+      left: 0; width: 100%;
+      background: #fff;
+      border-radius: 11px;
+      box-shadow: 0 2px 16px #3c73ff27;
+      z-index: 9;
+      margin-top: 7px;
+      overflow: hidden;
+      animation: mui-dropdown-in .22s cubic-bezier(.12,.79,.31,1.06);
+    }
+    @keyframes mui-dropdown-in {from{transform:translateY(-10px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    .mui-dropdown-list.show {display: block;}
+    .mui-dropdown-item {
+      padding: 11px 17px;
+      cursor: pointer;
+      transition: background .13s;
+      color: var(--primary);
+    }
+    .mui-dropdown-item:hover {background: #e4ebff;}
+    /* Табы */
+    .mui-tabs {
+      display: flex;
+      border-radius: 9px 9px 0 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px #3c73ff11;
+      margin-bottom: 9px;
+    }
+    .mui-tab-btn {
+      flex: 1 1 0;
+      background: #e4ebff;
+      color: #3460d1;
+      font-weight: 600;
+      border: none;
+      padding: 12px 0;
+      font-size: 1.09em;
+      cursor: pointer;
+      transition: background .16s, color .14s;
+      border-bottom: 4px solid transparent;
+    }
+    .mui-tab-btn.active {
+      background: #fff;
+      color: var(--primary);
+      border-bottom: 4px solid var(--primary);
+    }
+    .mui-tab-content {padding: 18px 10px 5px 10px;}
+    /* Breadcrumbs */
+    .mui-breadcrumbs {
+      display: flex;
+      gap: 10px;
+      font-size: 1.03em;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .mui-breadcrumbs a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      transition: color .16s;
+    }
+    .mui-breadcrumbs a:hover {color: var(--accent);}
+    .mui-breadcrumbs .mui-bc-sep {
+      color: #b3b9c9;
+      font-size: 1.1em;
+      user-select: none;
+    }
+    /* Responsive */
+    @media (max-width: 800px) {
+      .mui-kit-main {padding: 20px 3vw;}
+      .mui-title {font-size: 2em;}
+      .mui-components {gap: 21px;}
+    }
+    @media (max-width: 600px) {
+      .mui-kit-main {padding: 8px 0;}
+      .mui-title {font-size: 1.3em;}
+      .mui-block {padding: 12px 2vw;}
+      .mui-block-title {font-size:1em;}
+      .mui-card {max-width: 98vw;}
+    }
+    /* Highlight for copy feedback */
+    .mui-code-block.flash {
+      box-shadow: 0 0 0 5px #06d6a0a0;
+      transition: box-shadow .16s;
+    }
+  </style>
+</head>
+<body>
+  <div class="mui-kit-main">
+    <div class="mui-title">
+      MustaFoshoh UI KIT <span>🌪️🔥</span>
+    </div>
+    <div class="mui-subtitle">
+      Современный, анимированный и копируемый UI Kit с 18 компонентами.<br>
+      Каждый компонент — с примерами и HTML/CSS кодом для быстрой вставки в проекты!
+    </div>
+    <div class="mui-components">
+      <!-- 1. Animated Gradient Button -->
+      <div class="mui-block">
+        <div class="mui-block-title">1. Анимированная кнопка 🌈</div>
+        <div class="mui-preview">
+          <button class="mui-btn-anim">Нажми меня!</button>
+        </div>
+        <div class="mui-block-tip">Градиентная кнопка с анимацией наведения</div>
+        <pre class="mui-code-block" data-code='&lt;button class="mui-btn-anim"&gt;Нажми меня!&lt;/button&gt;
+&lt;style&gt;
+.mui-btn-anim {
+  padding: 13px 36px;
+  background: linear-gradient(90deg, #3c73ff, #ff5480);
+  color: #fff; border: none; border-radius: 29px;
+  font-size: 1.16em; font-weight: 700;
+  box-shadow: 0 2px 22px #3c73ff25; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .13s, box-shadow .16s, background .26s;
+}
+.mui-btn-anim::after {
+  content: ""; position: absolute; top:0; left:-110%;
+  width:90%; height:100%; background:linear-gradient(90deg,#fff5,#fff0 77%);
+  z-index:2; transform:skewX(-32deg);
+  transition:left 0.52s cubic-bezier(.5,.12,.89,.62);
+  pointer-events: none;
+}
+.mui-btn-anim:hover {transform: scale(1.05) rotate(-1deg); box-shadow:0 4px 36px #3c73ff4a;}
+.mui-btn-anim:hover::after {left:110%;}
+&lt;/style&gt;'>
+        </pre>
+      </div>
+      <!-- 2. Пульсирующая кнопка -->
+      <div class="mui-block">
+        <div class="mui-block-title">2. Пульсирующая кнопка</div>
+        <div class="mui-preview">
+          <button class="mui-btn-pulse">Pulse!</button>
+        </div>
+        <div class="mui-block-tip">Кнопка с эффектом пульсации для привлечения внимания</div>
+        <pre class="mui-code-block" data-code='&lt;button class="mui-btn-pulse"&gt;Pulse!&lt;/button&gt;
+&lt;style&gt;
+.mui-btn-pulse {
+  background: #06d6a0; color: #fff;
+  padding: 12px 32px; border: none; border-radius: 18px;
+  font-size: 1.09em; font-weight: 700;
+  box-shadow: 0 0 0 0 #06d6a0;
+  animation: mui-pulse 1.2s infinite; cursor: pointer;
+  transition: background 0.18s, transform 0.15s;
+}
+@keyframes mui-pulse {
+  0% {box-shadow: 0 0 0 0 #06d6a0;}
+  70% {box-shadow: 0 0 0 16px rgba(6,214,160,0);}
+  100% {box-shadow: 0 0 0 0 rgba(6,214,160,0);}
+}
+.mui-btn-pulse:hover {background: #059e74;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 3. 3D Кнопка -->
+      <div class="mui-block">
+        <div class="mui-block-title">3. 3D Кнопка</div>
+        <div class="mui-preview">
+          <button class="mui-btn-3d">3D Button</button>
+        </div>
+        <div class="mui-block-tip">Объемная кнопка с эффектом нажатия</div>
+        <pre class="mui-code-block" data-code='&lt;button class="mui-btn-3d"&gt;3D Button&lt;/button&gt;
+&lt;style&gt;
+.mui-btn-3d {
+  background: linear-gradient(180deg, #fff, #3c73ff66 40%, #3c73ff 100%);
+  color: #3c73ff; font-weight: 700; font-size: 1.03em;
+  border: none; border-radius: 15px; padding: 12px 34px;
+  box-shadow: 0 6px 0 #3c73ff55, 0 2px 16px #3c73ff33;
+  transition: transform .13s, box-shadow .18s; cursor: pointer;
+}
+.mui-btn-3d:active {transform: translateY(3px); box-shadow: 0 2px 0 #3c73ff77;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 4. Кнопка с иконкой -->
+      <div class="mui-block">
+        <div class="mui-block-title">4. Кнопка с иконкой</div>
+        <div class="mui-preview">
+          <button class="mui-btn-icon">
+            <svg width="18" height="18" fill="none" viewBox="0 0 20 20"><path d="M2 10h16M10 2v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            Добавить
+          </button>
+        </div>
+        <div class="mui-block-tip">Кнопка с SVG-иконкой слева</div>
+        <pre class="mui-code-block" data-code='&lt;button class="mui-btn-icon"&gt;
+  &lt;svg width="18" height="18" fill="none" viewBox="0 0 20 20"&gt;
+    &lt;path d="M2 10h16M10 2v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/&gt;
+  &lt;/svg&gt;Добавить
+&lt;/button&gt;
+&lt;style&gt;
+.mui-btn-icon {
+  background: #ff5480; color: #fff; border: none; border-radius: 13px;
+  padding: 12px 28px 12px 16px; font-size: 1.08em; font-weight: 700;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  transition: background .17s;
+}
+.mui-btn-icon:hover {background: #d13c66;}
+.mui-btn-icon svg {font-size:1.1em;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 5. Input c анимацией фокуса -->
+      <div class="mui-block">
+        <div class="mui-block-title">5. Анимированный Input</div>
+        <div class="mui-preview">
+          <input class="mui-input-anim" placeholder="Введите имя...">
+        </div>
+        <div class="mui-block-tip">Input с плавным цветом и тенью при фокусе</div>
+        <pre class="mui-code-block" data-code='&lt;input class="mui-input-anim" placeholder="Введите имя..."&gt;
+&lt;style&gt;
+.mui-input-anim {
+  border: 2px solid #e4ebff; padding: 13px 17px; border-radius: 12px;
+  font-size: 1.08em; background: #fafdff; width: 100%;
+  transition: border-color .19s, box-shadow .19s; outline: none;
+  box-shadow: 0 1px 6px #3c73ff16;
+}
+.mui-input-anim:focus {
+  border-color: #3c73ff;
+  box-shadow: 0 2px 18px #3c73ff33; background: #fff;
+}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 6. Input с иконкой -->
+      <div class="mui-block">
+        <div class="mui-block-title">6. Input с иконкой</div>
+        <div class="mui-preview">
+          <span class="mui-input-icon-box">
+            <svg width="18" height="18" fill="none" viewBox="0 0 20 20"><circle cx="9" cy="9" r="7" stroke="#ff5480" stroke-width="2"/><line x1="15" y1="15" x2="19" y2="19" stroke="#ff5480" stroke-width="2" stroke-linecap="round"/></svg>
+            <input class="mui-input-icon" placeholder="Поиск...">
+          </span>
+        </div>
+        <div class="mui-block-tip">Input с иконкой слева (SVG)</div>
+        <pre class="mui-code-block" data-code='&lt;span class="mui-input-icon-box"&gt;
+  &lt;svg width="18" height="18" fill="none" viewBox="0 0 20 20"&gt;
+    &lt;circle cx="9" cy="9" r="7" stroke="#ff5480" stroke-width="2"/&gt;
+    &lt;line x1="15" y1="15" x2="19" y2="19" stroke="#ff5480" stroke-width="2" stroke-linecap="round"/&gt;
+  &lt;/svg&gt;
+  &lt;input class="mui-input-icon" placeholder="Поиск..."&gt;
+&lt;/span&gt;
+&lt;style&gt;
+.mui-input-icon-box {position:relative; display:flex; align-items:center; width:100%;}
+.mui-input-icon {
+  border:2px solid #e4ebff; padding:13px 17px 13px 45px; border-radius:12px;
+  font-size:1.08em; background:#fafdff; width:100%;
+  transition:border-color .19s, box-shadow .19s; outline:none;
+  box-shadow:0 1px 6px #3c73ff16;
+}
+.mui-input-icon:focus {
+  border-color:#ff5480; box-shadow:0 2px 18px #ff548033;
+}
+.mui-input-icon-box svg {
+  position:absolute; left:15px; font-size:1.15em; color:#ff5480; pointer-events:none;
+}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 7. Кастомный чекбокс -->
+      <div class="mui-block">
+        <div class="mui-block-title">7. Кастомный Checkbox</div>
+        <div class="mui-preview">
+          <label class="mui-checkbox">
+            <input type="checkbox">
+            <span class="mui-checkmark"></span>
+            Согласен
+          </label>
+        </div>
+        <div class="mui-block-tip">Стильный чекбокс с анимацией галочки</div>
+        <pre class="mui-code-block" data-code='&lt;label class="mui-checkbox"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="mui-checkmark"&gt;&lt;/span&gt;Согласен
+&lt;/label&gt;
+&lt;style&gt;
+.mui-checkbox {
+  position:relative; display:inline-block; padding-left:34px;
+  cursor:pointer; font-size:1.08em; color:#3c73ff; font-weight:600;
+}
+.mui-checkbox input {position:absolute; opacity:0; cursor:pointer; height:0;width:0;}
+.mui-checkmark {
+  position:absolute; left:0; top:0; height:22px; width:22px;
+  background:#e4ebff; border-radius:7px; border:2px solid #3c73ff;
+  transition:background .14s, border .17s;
+}
+.mui-checkbox input:checked ~ .mui-checkmark {
+  background:#3c73ff; border:2px solid #ff5480;
+}
+.mui-checkmark:after {
+  content:""; position:absolute; display:none; left:6px; top:2px;
+  width:7px; height:13px; border:solid #fff; border-width:0 3px 3px 0;
+  transform:rotate(42deg);
+}
+.mui-checkbox input:checked ~ .mui-checkmark:after {display:block;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 8. Кастомный Radio -->
+      <div class="mui-block">
+        <div class="mui-block-title">8. Кастомный Radio</div>
+        <div class="mui-preview">
+          <label class="mui-radio">
+            <input type="radio" name="mui-radio-demo" checked>
+            <span class="mui-radiomark"></span>Да
+          </label>
+          <label class="mui-radio">
+            <input type="radio" name="mui-radio-demo">
+            <span class="mui-radiomark"></span>Нет
+          </label>
+        </div>
+        <div class="mui-block-tip">Радио-кнопки с анимацией выбора</div>
+        <pre class="mui-code-block" data-code='&lt;label class="mui-radio"&gt;
+  &lt;input type="radio" name="mui-radio-demo" checked&gt;
+  &lt;span class="mui-radiomark"&gt;&lt;/span&gt;Да
+&lt;/label&gt;
+&lt;label class="mui-radio"&gt;
+  &lt;input type="radio" name="mui-radio-demo"&gt;
+  &lt;span class="mui-radiomark"&gt;&lt;/span&gt;Нет
+&lt;/label&gt;
+&lt;style&gt;
+.mui-radio {position:relative; display:inline-block; padding-left:32px;
+  cursor:pointer; font-size:1.08em; color:#ff5480; font-weight:600; margin-right:18px;}
+.mui-radio input {position:absolute; opacity:0; cursor:pointer;}
+.mui-radiomark {
+  position:absolute; left:0; top:1px; height:20px; width:20px;
+  background:#f9e4eb; border-radius:50%; border:2px solid #ff5480;
+  transition:background .13s, border .14s;
+}
+.mui-radio input:checked ~ .mui-radiomark {
+  background:#ff5480; border:2px solid #3c73ff;
+}
+.mui-radiomark:after {
+  content:""; position:absolute; display:none; left:5px; top:5px;
+  width:7px; height:7px; border-radius:50%; background:#fff;
+}
+.mui-radio input:checked ~ .mui-radiomark:after {display:block;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 9. Switch -->
+      <div class="mui-block">
+        <div class="mui-block-title">9. Переключатель (Switch)</div>
+        <div class="mui-preview">
+          <label class="mui-switch">
+            <input type="checkbox" class="mui-switch-input">
+            <span class="mui-switch-slider"></span>
+            Вкл
+          </label>
+        </div>
+        <div class="mui-block-tip">Switch с плавной анимацией</div>
+        <pre class="mui-code-block" data-code='&lt;label class="mui-switch"&gt;
+  &lt;input type="checkbox" class="mui-switch-input"&gt;
+  &lt;span class="mui-switch-slider"&gt;&lt;/span&gt;Вкл
+&lt;/label&gt;
+&lt;style&gt;
+.mui-switch {display:inline-flex; align-items:center; cursor:pointer; font-weight:600; color:#06d6a0;}
+.mui-switch-input {display:none;}
+.mui-switch-slider {
+  width:48px; height:26px; border-radius:13px; background:#e4ebff; position:relative;
+  transition:background 0.15s; margin:0 8px 0 0;
+}
+.mui-switch-slider::before {
+  content:""; display:block; position:absolute; left:4px; top:4px;
+  width:18px; height:18px; border-radius:50%; background:#fff;
+  transition:left .18s, background .15s; box-shadow:0 1px 5px #c9d7ff80;
+}
+.mui-switch-input:checked + .mui-switch-slider {
+  background:#06d6a0;
+}
+.mui-switch-input:checked + .mui-switch-slider::before {
+  left:26px; background:#e4ffef;
+}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 10. Tooltip -->
+      <div class="mui-block">
+        <div class="mui-block-title">10. Tooltip</div>
+        <div class="mui-preview">
+          <span class="mui-tooltip">Наведи на меня
+            <span class="mui-tooltip-text">Это стильный тултип!</span>
+          </span>
+        </div>
+        <div class="mui-block-tip">Всплывающая подсказка при наведении</div>
+        <pre class="mui-code-block" data-code='&lt;span class="mui-tooltip"&gt;Наведи на меня
+  &lt;span class="mui-tooltip-text"&gt;Это стильный тултип!&lt;/span&gt;
+&lt;/span&gt;
+&lt;style&gt;
+.mui-tooltip {
+  position:relative; cursor:pointer; text-decoration:underline dotted #c9d7ff;
+  color:#3c73ff; font-weight:600;
+}
+.mui-tooltip-text {
+  visibility:hidden; width:180px; background:#3c73ff; color:#fff; text-align:center;
+  border-radius:8px; padding:8px 10px; position:absolute; z-index:10;
+  left:50%; transform:translateX(-50%); bottom:120%; opacity:0;
+  transition:opacity 0.16s; font-size:0.99em; pointer-events:none;
+}
+.mui-tooltip:hover .mui-tooltip-text {
+  visibility:visible; opacity:1;
+}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 11. Карточка (Card) -->
+      <div class="mui-block">
+        <div class="mui-block-title">11. Карточка UI</div>
+        <div class="mui-preview">
+          <div class="mui-card">
+            <div class="mui-card-title">Заголовок</div>
+            <div class="mui-card-desc">Описание карточки. Вы можете положить сюда любой контент!</div>
+            <button class="mui-btn-anim" style="font-size:0.93em;">Действие</button>
+          </div>
+        </div>
+        <div class="mui-block-tip">Карточка с тенью и анимированной кнопкой</div>
+        <pre class="mui-code-block" data-code='&lt;div class="mui-card"&gt;
+  &lt;div class="mui-card-title"&gt;Заголовок&lt;/div&gt;
+  &lt;div class="mui-card-desc"&gt;Описание карточки. Вы можете положить сюда любой контент!&lt;/div&gt;
+  &lt;button class="mui-btn-anim" style="font-size:0.93em;"&gt;Действие&lt;/button&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.mui-card {
+  background:linear-gradient(135deg,#fff,#e4ebff 75%);
+  border-radius:17px; box-shadow:0 4px 32px #3c73ff13;
+  padding:26px 22px 22px; margin-bottom:10px;
+  transition:box-shadow .18s; min-width:180px; max-width:340px;
+  margin-left:auto; margin-right:auto;
+}
+.mui-card:hover {box-shadow:0 10px 36px #3c73ff24;}
+.mui-card-title {
+  font-size:1.19em; color:#3c73ff; font-weight:700; margin-bottom:7px; letter-spacing:1px;
+}
+.mui-card-desc {color:#686868; font-size:1em; margin-bottom:10px;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 12. Alert -->
+      <div class="mui-block">
+        <div class="mui-block-title">12. Alert-уведомления</div>
+        <div class="mui-preview">
+          <div class="mui-alert mui-alert-info"><span class="mui-alert-icon">ℹ️</span>Информация</div>
+          <div class="mui-alert mui-alert-success"><span class="mui-alert-icon">✅</span>Успешно!</div>
+          <div class="mui-alert mui-alert-warning"><span class="mui-alert-icon">⚠️</span>Внимание!</div>
+          <div class="mui-alert mui-alert-danger"><span class="mui-alert-icon">⛔</span>Ошибка!</div>
+        </div>
+        <div class="mui-block-tip">Разные стили алертов для статуса</div>
+        <pre class="mui-code-block" data-code='&lt;div class="mui-alert mui-alert-info"&gt;&lt;span class="mui-alert-icon"&gt;ℹ️&lt;/span&gt;Информация&lt;/div&gt;
+&lt;div class="mui-alert mui-alert-success"&gt;&lt;span class="mui-alert-icon"&gt;✅&lt;/span&gt;Успешно!&lt;/div&gt;
+&lt;div class="mui-alert mui-alert-warning"&gt;&lt;span class="mui-alert-icon"&gt;⚠️&lt;/span&gt;Внимание!&lt;/div&gt;
+&lt;div class="mui-alert mui-alert-danger"&gt;&lt;span class="mui-alert-icon"&gt;⛔&lt;/span&gt;Ошибка!&lt;/div&gt;
+&lt;style&gt;
+.mui-alert {border-radius:11px; padding:16px 26px; font-weight:600; margin-bottom:14px;
+  display:flex; align-items:center; font-size:1em; gap:12px; box-shadow:0 2px 10px #dbeaff80;}
+.mui-alert-info {background:#e7edfd; color:#3460d1;}
+.mui-alert-success {background:#e4ffef; color:#21b15f;}
+.mui-alert-warning {background:#fff8e7; color:#b39322;}
+.mui-alert-danger {background:#ffe7ed; color:#d13260;}
+.mui-alert-icon {font-size:1.4em; margin-right:7px;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 13. Modal -->
+      <div class="mui-block">
+        <div class="mui-block-title">13. Модальное окно</div>
+        <div class="mui-preview">
+          <button class="mui-btn-anim" onclick="openMUIKITModal()">Открыть модалку</button>
+          <div class="mui-modal-backdrop" id="mui-modal-kit">
+            <div class="mui-modal">
+              <button class="mui-modal-close" onclick="closeMUIKITModal()">&times;</button>
+              <div class="mui-modal-title">Модальное окно</div>
+              <div>Это простая модалка! Можешь закрыть её, кликнув на крестик или вне окна.</div>
+              <br>
+              <button class="mui-btn-anim" onclick="closeMUIKITModal()">Закрыть</button>
+            </div>
+          </div>
+        </div>
+        <div class="mui-block-tip">Модальное окно с анимацией появления</div>
+        <pre class="mui-code-block" data-code='&lt;button class="mui-btn-anim" onclick="openModal()"&gt;Открыть модалку&lt;/button&gt;
+&lt;div class="mui-modal-backdrop" id="mui-modal-kit"&gt;
+  &lt;div class="mui-modal"&gt;
+    &lt;button class="mui-modal-close" onclick="closeModal()"&gt;&amp;times;&lt;/button&gt;
+    &lt;div class="mui-modal-title"&gt;Модальное окно&lt;/div&gt;
+    &lt;div&gt;Это простая модалка! Можешь закрыть её, кликнув на крестик или вне окна.&lt;/div&gt;
+    &lt;br&gt;
+    &lt;button class="mui-btn-anim" onclick="closeModal()"&gt;Закрыть&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.mui-modal-backdrop {
+  display:none; position:fixed; z-index:20; top:0; left:0; width:100vw; height:100vh;
+  background:#21243d99; align-items:center; justify-content:center;
+}
+.mui-modal {
+  background:#fff; border-radius:18px; box-shadow:0 12px 40px #0002; max-width:370px;
+  min-width:240px; padding:30px 24px 18px 24px; position:relative; text-align:center;
+  animation:mui-modal-in .33s cubic-bezier(.11,1.28,.27,1.08);
+}
+@keyframes mui-modal-in {
+  from {transform:scale(0.85) translateY(40px); opacity:0;}
+  to {transform:scale(1) translateY(0); opacity:1;}
+}
+.mui-modal-title {font-size:1.27em; font-weight:700; color:#3c73ff; margin-bottom:13px;}
+.mui-modal-close {
+  position:absolute; top:15px; right:14px; background:none; border:none;
+  font-size:1.4em; color:#999; cursor:pointer;
+}
+&lt;/style&gt;
+&lt;script&gt;
+function openModal(){document.getElementById("mui-modal-kit").style.display="flex";}
+function closeModal(){document.getElementById("mui-modal-kit").style.display="none";}
+&lt;/script&gt;'></pre>
+      </div>
+      <!-- 14. Loader (Спиннер) -->
+      <div class="mui-block">
+        <div class="mui-block-title">14. Loader (Спиннер)</div>
+        <div class="mui-preview">
+          <span class="mui-loader"></span>
+          <span style="vertical-align: middle; font-size:1em;">Загрузка...</span>
+        </div>
+        <div class="mui-block-tip">Анимированный спиннер для загрузки</div>
+        <pre class="mui-code-block" data-code='&lt;span class="mui-loader"&gt;&lt;/span&gt; Загрузка...
+&lt;style&gt;
+.mui-loader {
+  display:inline-block; width:34px; height:34px;
+  border:4px solid #3c73ff; border-top:4px solid #fff;
+  border-radius:50%; animation:mui-spin 0.9s linear infinite;
+  margin-right:8px; vertical-align:middle;
+}
+@keyframes mui-spin {to {transform:rotate(360deg);}}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 15. Аватар -->
+      <div class="mui-block">
+        <div class="mui-block-title">15. Аватар</div>
+        <div class="mui-preview">
+          <span class="mui-avatar">MF</span>
+        </div>
+        <div class="mui-block-tip">Круглый аватар с градиентом</div>
+        <pre class="mui-code-block" data-code='&lt;span class="mui-avatar"&gt;MF&lt;/span&gt;
+&lt;style&gt;
+.mui-avatar {
+  width:54px; height:54px; border-radius:50%;
+  background:linear-gradient(135deg, #3c73ff, #ff5480);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:1.67em; font-weight:bold; color:#fff; margin-right:10px;
+  box-shadow:0 2px 10px #3c73ff33; border:3px solid #fff; transition:box-shadow 0.18s;
+}
+.mui-avatar:hover {box-shadow:0 6px 22px #3c73ff88;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 16. Прогресс-бар -->
+      <div class="mui-block">
+        <div class="mui-block-title">16. Прогресс-бар</div>
+        <div class="mui-preview">
+          <div class="mui-progress-bar-bg">
+            <div class="mui-progress-bar" style="width: 73%;"></div>
+          </div>
+        </div>
+        <div class="mui-block-tip">Цветной прогресс-бар с анимацией заполнения</div>
+        <pre class="mui-code-block" data-code='&lt;div class="mui-progress-bar-bg"&gt;
+  &lt;div class="mui-progress-bar" style="width: 73%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.mui-progress-bar-bg {
+  width:100%; height:18px; background:#e4ebff; border-radius:9px; overflow:hidden;
+  margin-top:6px; box-shadow:0 2px 8px #3c73ff13;
+}
+.mui-progress-bar {
+  height:100%; background:linear-gradient(90deg,#06d6a0,#3c73ff 80%);
+  border-radius:9px; transition:width .33s cubic-bezier(.35,1.2,.53,1.01);
+  box-shadow:0 1px 6px #06d6a055;
+}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 17. Таблица -->
+      <div class="mui-block">
+        <div class="mui-block-title">17. Таблица</div>
+        <div class="mui-preview">
+          <table class="mui-table">
+            <thead>
+              <tr><th>Имя</th><th>Email</th><th>Статус</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Анна</td><td>anna@mail.com</td><td>✔️</td></tr>
+              <tr><td>Иван</td><td>ivan@mail.com</td><td>⏳</td></tr>
+              <tr><td>Максим</td><td>max@mail.com</td><td>❌</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mui-block-tip">Минималистичная таблица</div>
+        <pre class="mui-code-block" data-code='&lt;table class="mui-table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Имя&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Статус&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Анна&lt;/td&gt;&lt;td&gt;anna@mail.com&lt;/td&gt;&lt;td&gt;✔️&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Иван&lt;/td&gt;&lt;td&gt;ivan@mail.com&lt;/td&gt;&lt;td&gt;⏳&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Максим&lt;/td&gt;&lt;td&gt;max@mail.com&lt;/td&gt;&lt;td&gt;❌&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;style&gt;
+.mui-table {border-collapse:collapse; width:100%; background:#fff; border-radius:12px;
+  overflow:hidden; box-shadow:0 2px 10px #3c73ff09; font-size:0.99em;}
+.mui-table th, .mui-table td {padding:11px 13px; border-bottom:1px solid #e4ebff; text-align:left;}
+.mui-table th {background:#f7faff; color:#3c73ff; font-weight:700; letter-spacing:1px;}
+.mui-table tr:last-child td {border-bottom:none;}
+.mui-table tr:hover td {background:#f3f9ff;}
+&lt;/style&gt;'></pre>
+      </div>
+      <!-- 18. Dropdown + Tabs + Хлебные крошки -->
+      <div class="mui-block">
+        <div class="mui-block-title">18. Dropdown, Tabs, Breadcrumbs</div>
+        <div class="mui-preview">
+          <div style="margin-bottom:14px">
+            <div class="mui-dropdown" id="mui-kit-dropdown">
+              <button class="mui-dropdown-btn" onclick="muiDropdownToggle(this)">Выбери опцию</button>
+              <div class="mui-dropdown-list">
+                <div class="mui-dropdown-item" onclick="muiDropdownSelect(this)">JavaScript</div>
+                <div class="mui-dropdown-item" onclick="muiDropdownSelect(this)">HTML</div>
+                <div class="mui-dropdown-item" onclick="muiDropdownSelect(this)">CSS</div>
+              </div>
+            </div>
+          </div>
+          <div class="mui-tabs" id="mui-kit-tabs">
+            <button class="mui-tab-btn active" onclick="muiTabSwitch(this,0)">Вкладка 1</button>
+            <button class="mui-tab-btn" onclick="muiTabSwitch(this,1)">Вкладка 2</button>
+          </div>
+          <div class="mui-tab-content" id="mui-kit-tab-content">
+            Контент первой вкладки.
+          </div>
+          <div class="mui-breadcrumbs" style="margin-top:12px">
+            <a href="#">Главная</a>
+            <span class="mui-bc-sep">/</span>
+            <a href="#">UI Kit</a>
+            <span class="mui-bc-sep">/</span>
+            <span style="color:#888">Компоненты</span>
+          </div>
+        </div>
+        <div class="mui-block-tip">Dropdown, Tabs и Хлебные крошки</div>
+        <pre class="mui-code-block" data-code='&lt;!-- Dropdown --&gt;
+&lt;div class="mui-dropdown"&gt;
+  &lt;button class="mui-dropdown-btn" onclick="muiDropdownToggle(this)"&gt;Выбери опцию&lt;/button&gt;
+  &lt;div class="mui-dropdown-list"&gt;
+    &lt;div class="mui-dropdown-item" onclick="muiDropdownSelect(this)"&gt;JavaScript&lt;/div&gt;
+    &lt;div class="mui-dropdown-item" onclick="muiDropdownSelect(this)"&gt;HTML&lt;/div&gt;
+    &lt;div class="mui-dropdown-item" onclick="muiDropdownSelect(this)"&gt;CSS&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- Tabs --&gt;
+&lt;div class="mui-tabs"&gt;
+  &lt;button class="mui-tab-btn active" onclick="muiTabSwitch(this,0)"&gt;Вкладка 1&lt;/button&gt;
+  &lt;button class="mui-tab-btn" onclick="muiTabSwitch(this,1)"&gt;Вкладка 2&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="mui-tab-content" id="mui-kit-tab-content"&gt;Контент первой вкладки.&lt;/div&gt;
+&lt;!-- Breadcrumbs --&gt;
+&lt;div class="mui-breadcrumbs"&gt;
+  &lt;a href="#"&gt;Главная&lt;/a&gt;
+  &lt;span class="mui-bc-sep"&gt;/&lt;/span&gt;
+  &lt;a href="#"&gt;UI Kit&lt;/a&gt;
+  &lt;span class="mui-bc-sep"&gt;/&lt;/span&gt;
+  &lt;span style="color:#888"&gt;Компоненты&lt;/span&gt;
+&lt;/div&gt;
+&lt;style&gt;
+/* Dropdown */
+.mui-dropdown {position:relative; display:inline-block; width:100%; min-width:154px;}
+.mui-dropdown-btn {
+  background:#fff; color:#3c73ff; font-weight:600; border:2px solid #e4ebff;
+  border-radius:11px; padding:13px 31px 13px 17px; min-width:120px;
+  cursor:pointer; font-size:1.09em; transition:border .16s; text-align:left; width:100%; position:relative;
+}
+.mui-dropdown-btn:after {
+  content:"▼"; font-size:0.85em; color:#999; position:absolute; right:13px; top:13px; pointer-events:none; transition:.2s;
+}
+.mui-dropdown-list {
+  display:none; position:absolute; left:0; width:100%; background:#fff; border-radius:11px;
+  box-shadow:0 2px 16px #3c73ff27; z-index:9; margin-top:7px; overflow:hidden; animation:mui-dropdown-in .22s cubic-bezier(.12,.79,.31,1.06);
+}
+@keyframes mui-dropdown-in {from{transform:translateY(-10px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.mui-dropdown-list.show {display:block;}
+.mui-dropdown-item {padding:11px 17px; cursor:pointer; transition:background .13s; color:#3c73ff;}
+.mui-dropdown-item:hover {background:#e4ebff;}
+/* Tabs */
+.mui-tabs {display:flex; border-radius:9px 9px 0 0; overflow:hidden; box-shadow:0 2px 8px #3c73ff11; margin-bottom:9px;}
+.mui-tab-btn {
+  flex:1 1 0; background:#e4ebff; color:#3460d1; font-weight:600; border:none; padding:12px 0;
+  font-size:1.09em; cursor:pointer; transition:background .16s,color .14s; border-bottom:4px solid transparent;
+}
+.mui-tab-btn.active {background:#fff; color:#3c73ff; border-bottom:4px solid #3c73ff;}
+.mui-tab-content {padding:18px 10px 5px 10px;}
+/* Breadcrumbs */
+.mui-breadcrumbs {display:flex; gap:10px; font-size:1.03em; align-items:center; flex-wrap:wrap;}
+.mui-breadcrumbs a {text-decoration:none; color:#3c73ff; font-weight:600; transition:color .16s;}
+.mui-breadcrumbs a:hover {color:#ff5480;}
+.mui-breadcrumbs .mui-bc-sep {color:#b3b9c9; font-size:1.1em; user-select:none;}
+&lt;/style&gt;
+&lt;script&gt;
+// Dropdown
+function muiDropdownToggle(btn){
+  var list = btn.nextElementSibling;
+  document.querySelectorAll('.mui-dropdown-list').forEach(l=>{if(l!==list)l.classList.remove('show')});
+  list.classList.toggle('show');
+}
+function muiDropdownSelect(item){
+  var btn = item.parentNode.previousElementSibling;
+  btn.innerText = item.innerText;
+  item.parentNode.classList.remove('show');
+}
+// Tabs
+function muiTabSwitch(btn,idx){
+  var tabs = btn.parentNode.querySelectorAll('.mui-tab-btn');
+  tabs.forEach((t,i)=>{t.classList.toggle('active',i==idx)});
+  document.getElementById('mui-kit-tab-content').innerHTML = idx ? 'Контент второй вкладки.' : 'Контент первой вкладки.';
+}
+window.addEventListener('click',function(e){
+  if(!e.target.classList.contains('mui-dropdown-btn'))
+    document.querySelectorAll('.mui-dropdown-list').forEach(l=>l.classList.remove('show'));
+});
+&lt;/script&gt;'></pre>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Copy code
+    document.querySelectorAll('.mui-code-block').forEach(block => {
+      let btn = document.createElement('button');
+      btn.className = 'mui-copy-btn';
+      btn.innerHTML = '<svg width="16" height="16" fill="none" style="margin-right:2px;vertical-align:middle;" viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="3" fill="#fff" stroke="#3c73ff" stroke-width="1.2"/><rect x="7" y="7" width="9" height="9" rx="2" fill="#3c73ff" fill-opacity=".15"/></svg>Копировать';
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        let code = block.getAttribute('data-code');
+        navigator.clipboard.writeText(code.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg width="16" height="16" fill="none" style="margin-right:2px;vertical-align:middle;" viewBox="0 0 20 20"><path d="M5 11l4 4 6-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Скопировано!';
+        block.classList.add('flash');
+        setTimeout(()=>{
+          btn.classList.remove('copied');
+          btn.innerHTML = '<svg width="16" height="16" fill="none" style="margin-right:2px;vertical-align:middle;" viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" rx="3" fill="#fff" stroke="#3c73ff" stroke-width="1.2"/><rect x="7" y="7" width="9" height="9" rx="2" fill="#3c73ff" fill-opacity=".15"/></svg>Копировать';
+          block.classList.remove('flash');
+        }, 1100);
+      };
+      block.appendChild(btn);
+      block.onclick = function(e) {
+        if (e.target !== btn) btn.click();
+      };
+    });
+
+    // Modal logic
+    window.openMUIKITModal = function() {
+      document.getElementById("mui-modal-kit").style.display = "flex";
+      setTimeout(()=>{document.getElementById("mui-modal-kit").style.opacity = "1";}, 10);
+    }
+    window.closeMUIKITModal = function() {
+      document.getElementById("mui-modal-kit").style.opacity = "0";
+      setTimeout(()=>{document.getElementById("mui-modal-kit").style.display = "none";}, 180);
+    }
+    document.getElementById("mui-modal-kit").addEventListener("click", function(e) {
+      if (e.target === this) window.closeMUIKITModal();
+    });
+
+    // Dropdown logic
+    window.muiDropdownToggle = function(btn){
+      var list = btn.nextElementSibling;
+      document.querySelectorAll('.mui-dropdown-list').forEach(l=>{if(l!==list)l.classList.remove('show')});
+      list.classList.toggle('show');
+    }
+    window.muiDropdownSelect = function(item){
+      var btn = item.parentNode.previousElementSibling;
+      btn.innerText = item.innerText;
+      item.parentNode.classList.remove('show');
+    }
+    // Tabs logic
+    window.muiTabSwitch = function(btn,idx){
+      var tabs = btn.parentNode.querySelectorAll('.mui-tab-btn');
+      tabs.forEach((t,i)=>{t.classList.toggle('active',i==idx)});
+      document.getElementById('mui-kit-tab-content').innerHTML = idx ? 'Контент второй вкладки.' : 'Контент первой вкладки.';
+    }
+    window.addEventListener('click',function(e){
+      if(!e.target.classList.contains('mui-dropdown-btn'))
+        document.querySelectorAll('.mui-dropdown-list').forEach(l=>l.classList.remove('show'));
+    });
+  </script>
+</body>
+</html>
